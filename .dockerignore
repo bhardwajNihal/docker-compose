@@ -1,0 +1,36 @@
+# Node.js specific
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+.env.*
+
+# TypeScript specific
+# The 'dist' folder is typically generated *inside* the container,
+# so you usually don't need to copy your local dist folder.
+# However, if you are doing multi-stage builds where a build stage
+# outputs to 'dist' and a later stage *copies* from that build stage,
+# you might explicitly include `dist` if it's the output of an *earlier* build stage.
+# For typical setup where build happens in *single stage*, it's good to exclude:
+dist/
+build/ # Alternative for build output
+
+# Git
+.git
+.gitignore
+
+# IDE and OS files
+.vscode/        # VS Code settings
+.idea/          # IntelliJ/WebStorm settings
+.DS_Store       # macOS specific
+Thumbs.db       # Windows specific
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+
+# Test/Coverage reports (if not needed in the final image)
+coverage/
+*.test.ts
+*.spec.ts
