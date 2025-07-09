@@ -1,0 +1,40 @@
+
+#Docker Compose lets us define and run multi-container Docker apps using a simple YAML file (docker-compose.yml).
+  # we define services like:
+    # db → runs Postgres
+    # app → runs our Express + Prisma backend
+  # And Docker Compose:
+    # Creates network
+    # Builds images
+    # Starts containers in the right order
+    # Passes env vars
+
+# A simple docker compose file script to be able to run my entire app with just one command
+  # >> docker compose up
+
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres
+    container_name: my_postgres
+    environment:
+      - POSTGRES_USER=nihal
+      - POSTGRES_PASSWORD=nihal123
+      - POSTGRES_DB=test1
+    ports:
+      - "5432:5432"
+
+  user_app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://nihal:nihal123@postgres:5432/test1
+    depends_on:
+      - postgres
+
+
+# we don’t need to explicitly define a network most of the time.
+# By default, Docker Compose creates a bridge network (named after your project), 
+# all services inside the docker-compose.yml can talk to each other using their service names (e.g. here ,postgres, user_app).
