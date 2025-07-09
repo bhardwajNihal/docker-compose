@@ -25,6 +25,8 @@ RUN npm run build
 EXPOSE 3000
 
 # Run the app (`start` script should point to the compiled dist output)
+#This makes sure the migrations are applied while running the container and not during build,
+# In the RUN command, provide the environment variable DATABASE_URL, for it to connect to the db container.
 CMD ["npm", "run", "docker:start"]
 
     
